@@ -21,6 +21,12 @@ func main() {
 			name = os.Args[2]
 		}
 		fmt.Println(Greet(name))
+	case "farewell":
+		name := ""
+		if len(os.Args) > 2 {
+			name = os.Args[2]
+		}
+		fmt.Println(Farewell(name))
 	default:
 		fmt.Fprintf(os.Stderr, "canary: unknown command %q\n", os.Args[1])
 		os.Exit(2)
@@ -37,4 +43,13 @@ func Greet(name string) string {
 		return "Hello, world!"
 	}
 	return "Hello, " + trimmed + "!"
+}
+
+// Farewell returns the farewell line for name, without a trailing newline.
+func Farewell(name string) string {
+	trimmed := strings.TrimSpace(name)
+	if trimmed == "" {
+		return "Goodbye, world!"
+	}
+	return "Goodbye, " + trimmed + "!"
 }
