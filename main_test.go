@@ -26,3 +26,22 @@ func TestGreet(t *testing.T) {
 		})
 	}
 }
+
+func TestFarewell(t *testing.T) {
+	cases := []struct {
+		name string
+		in   string
+		want string
+	}{
+		{"with name", "Ben", "Goodbye, Ben!"},
+		{"no name", "", "Goodbye, world!"},
+		{"spaces only", "   ", "Goodbye, world!"},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			if got := Farewell(c.in); got != c.want {
+				t.Fatalf("Farewell(%q) = %q, want %q", c.in, got, c.want)
+			}
+		})
+	}
+}
