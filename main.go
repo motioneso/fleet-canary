@@ -4,6 +4,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -14,6 +15,12 @@ func main() {
 	switch os.Args[1] {
 	case "add":
 		fmt.Println(Add(2, 3))
+	case "greet":
+		name := ""
+		if len(os.Args) > 2 {
+			name = os.Args[2]
+		}
+		fmt.Println(Greet(name))
 	default:
 		fmt.Fprintf(os.Stderr, "canary: unknown command %q\n", os.Args[1])
 		os.Exit(2)
@@ -22,3 +29,12 @@ func main() {
 
 // Add returns the sum of two integers.
 func Add(a, b int) int { return a + b }
+
+// Greet returns the greeting line for name, without a trailing newline.
+func Greet(name string) string {
+	trimmed := strings.TrimSpace(name)
+	if trimmed == "" {
+		return "Hello, world!"
+	}
+	return "Hello, " + trimmed + "!"
+}
